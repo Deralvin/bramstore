@@ -174,4 +174,18 @@ class ApiService {
       return {"status": "failed", "message": "error occured $e"};
     }
   }
+
+  Future<dynamic> getListHistory() async {
+    try {
+      final uri = Uri.parse("${baseurl}/transaksi/list");
+      token = await tokenaccess();
+      final response = await client.post(
+        uri,
+        headers: {'Authorization': "Bearer $token"},
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
+    }
+  }
 }
