@@ -30,8 +30,20 @@ class CartViewModel extends BaseModel {
     notifyListeners();
   }
 
-  void removeCheckout(int index) {
+  void removeCheckout(int index) async {
+    summary = 0;
     list_clothes.removeAt(index);
+    await storageService.setString(K_MY_CART, jsonEncode(list_clothes));
+    list_clothes =
+        jsonDecode(await storageService.getString(K_MY_CART) ?? "[]");
+    print(list_clothes);
+    list_clothes.forEach((element) {
+      print(element);
+      summary = summary +
+          (int.parse(element['harga'].toString()) *
+              int.parse(element['qty'].toString()));
+    });
+    print(summary);
     notifyListeners();
   }
 }

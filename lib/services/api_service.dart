@@ -75,6 +75,33 @@ class ApiService {
     }
   }
 
+  Future<dynamic> getKurir() async {
+    try {
+      final uri = Uri.parse("${baseurl}/kurir");
+      token = await tokenaccess();
+      final response =
+          await client.post(uri, headers: {'Authorization': "Bearer $token"});
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
+    }
+  }
+
+  Future<dynamic> getKurirLayanan(String kurir) async {
+    try {
+      final uri = Uri.parse("${baseurl}/kurir/layanan");
+      token = await tokenaccess();
+      final response = await client.post(
+        uri,
+        headers: {'Authorization': "Bearer $token"},
+        body: {"kurir": kurir},
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
+    }
+  }
+
   Future<dynamic> getProduct(
       {String idkategori = "", String keyword = "", String sort = ""}) async {
     try {
@@ -103,6 +130,27 @@ class ApiService {
       return jsonDecode(response.body);
     } catch (e) {
       return {"status": "Failed", "message": "$e"};
+    }
+  }
+
+  Future<dynamic> getHitungTotal(
+      String listproduk, String qty, String kurir, String layanan) async {
+    try {
+      final uri = Uri.parse("${baseurl}/transaksi/total");
+      token = await tokenaccess();
+      final response = await client.post(
+        uri,
+        headers: {'Authorization': "Bearer $token"},
+        body: {
+          "kurir": kurir,
+          "list_produk": listproduk,
+          "layanan_kurir": layanan,
+          "qty_produk": qty
+        },
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
     }
   }
 }
