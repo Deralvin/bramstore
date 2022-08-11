@@ -153,4 +153,25 @@ class ApiService {
       return {"status": "failed", "message": "error occured $e"};
     }
   }
+
+  Future<dynamic> konfirmasiPesanan(
+      String listproduk, String qty, String kurir, String layanan) async {
+    try {
+      final uri = Uri.parse("${baseurl}/transaksi/total");
+      token = await tokenaccess();
+      final response = await client.post(
+        uri,
+        headers: {'Authorization': "Bearer $token"},
+        body: {
+          "kurir": kurir,
+          "list_produk": listproduk,
+          "layanan_kurir": layanan,
+          "qty_produk": qty
+        },
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
+    }
+  }
 }

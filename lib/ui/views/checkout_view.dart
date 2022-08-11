@@ -241,12 +241,7 @@ class _CheckoutViewState extends State<CheckoutView>
                           onPressed: model.isKonfirmasi == false
                               ? null
                               : () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => CheckoutView(),
-                                    ),
-                                  );
+                                  model.konfirmasiDialog(context);
                                 },
                           child: Text("Konfirmasi"),
                         ),
