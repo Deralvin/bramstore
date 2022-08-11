@@ -129,8 +129,8 @@ class CartView extends StatelessWidget {
                               width: 150,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(18),
-                                child: Image.asset(
-                                  model.list_clothes[idx]['image'],
+                                child: Image.network(
+                                  model.list_clothes[idx]['gambar'],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -148,7 +148,7 @@ class CartView extends StatelessWidget {
                                     margin: EdgeInsets.only(
                                         top: idx == 0 ? 16 : 0, left: 25),
                                     child: Text(
-                                      "${model.list_clothes[idx]['name']}",
+                                      "${model.list_clothes[idx]['nama']}",
                                       style:
                                           blackTextStyle.copyWith(fontSize: 15),
                                       overflow: TextOverflow.ellipsis,
@@ -158,7 +158,7 @@ class CartView extends StatelessWidget {
                                   Container(
                                     margin: EdgeInsets.only(top: 16, left: 25),
                                     child: Text(
-                                      "Size : ${model.list_clothes[idx]['size']}",
+                                      "Size : ${model.list_clothes[idx]['ukuran']}",
                                       style: blackTextStyle.copyWith(
                                           fontSize: 14,
                                           color: Colors.grey.shade600),
@@ -167,7 +167,7 @@ class CartView extends StatelessWidget {
                                   Container(
                                     margin: EdgeInsets.only(top: 16, left: 25),
                                     child: Text(
-                                      "${model.list_clothes[idx]['price']}",
+                                      "${model.list_clothes[idx]['harga']}",
                                       style: blackTextStyle.copyWith(
                                           fontSize: 16, fontWeight: semiBold),
                                     ),
@@ -208,7 +208,7 @@ class CartView extends StatelessWidget {
                                                   width: 35,
                                                   alignment: Alignment.center,
                                                   child: Text(
-                                                      "${model.qty.toString()}"),
+                                                      "${model.list_clothes[idx]['qty'].toString()}"),
                                                 ),
                                                 InkWell(
                                                   onTap: () {
@@ -269,7 +269,7 @@ class CartView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(right: 16, top: 12),
                       child: Text(
-                        "Rp 410.000",
+                        "Rp ${model.summary}",
                         style: blackTextStyle.copyWith(
                             fontSize: 18, fontWeight: semiBold),
                       ),
@@ -290,7 +290,7 @@ class CartView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(right: 16, top: 12),
                       child: Text(
-                        "Rp 41.000",
+                        "Rp 0",
                         style: blackTextStyle.copyWith(
                             fontSize: 18, fontWeight: semiBold),
                       ),
@@ -318,7 +318,7 @@ class CartView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(right: 16, top: 12),
                       child: Text(
-                        "Rp 451.000",
+                        "Rp ${model.summary}",
                         style: blackTextStyle.copyWith(
                             fontSize: 18, fontWeight: semiBold),
                       ),
