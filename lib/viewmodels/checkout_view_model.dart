@@ -134,6 +134,12 @@ class CheckoutViewModel extends BaseModel {
             MaterialPageRoute(builder: (_) => BottomNavView()),
             (route) => false);
       });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Gagal ${data['message']}"),
+        ),
+      );
     }
 
     setBusy(false);

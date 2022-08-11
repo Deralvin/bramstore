@@ -3,6 +3,8 @@ import 'package:bramstore/viewmodels/history_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({Key? key}) : super(key: key);
@@ -40,43 +42,68 @@ class HistoryView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey.shade400)),
                     width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("nomor transaksi"),
-                            Text(
-                              "${model.history_data[idx]['nomor_transaksi']}",
-                              style: blackTextStyle.copyWith(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("nomor transaksi"),
+                                Text(
+                                  "${model.history_data[idx]['nomor_transaksi']}",
+                                  style: blackTextStyle.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text("harga"),
+                                Text(
+                                  "Rp. ${model.history_data[idx]['total_bayar']}",
+                                  style: blackTextStyle.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Text("harga"),
-                            Text(
-                              "Rp. ${model.history_data[idx]['total_bayar']}",
-                              style: blackTextStyle.copyWith(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("${model.history_data[idx]['status']}"),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Text("Batas Pembayaran"),
+                                Text(
+                                  "${model.history_data[idx]['pembayaran_expired']}",
+                                  style: blackTextStyle.copyWith(
+                                      color: Colors.red),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text("${model.history_data[idx]['status']}"),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text("Batas Pembayaran"),
-                            Text(
-                              "${model.history_data[idx]['pembayaran_expired']}",
-                              style: blackTextStyle.copyWith(color: Colors.red),
-                            ),
-                          ],
+                        ElevatedButton(
+                          onPressed: () async {
+                            final link = WhatsAppUnilink(
+                              phoneNumber: '+6289629758463',
+                              text:
+                                  "Kode Transaksi ${model.history_data[idx]['nomor_transaksi']}",
+                            );
+                            // Convert the WhatsAppUnilink instance to a string.
+                            // Use either Dart's string interpolation or the toString() method.
+                            // The "launch" method is part of "url_launcher".
+                            await launch('$link');
+                          },
+                          child: Text("Kirim Pembayaran"),
                         )
                       ],
                     ),
