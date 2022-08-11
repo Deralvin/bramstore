@@ -13,6 +13,7 @@ class CheckoutViewModel extends BaseModel {
   int biayaongkir = 0;
   int subtotal = 0;
   int total = 0;
+  bool isKonfirmasi = false;
   // Group Value for Radio Button.
   String kode = "";
   void initdata() async {
@@ -30,6 +31,7 @@ class CheckoutViewModel extends BaseModel {
 
   void getHitungTotal() async {
     setBusy(true);
+
     List produk = jsonDecode(await storageService.getString(K_MY_CART) ?? "[]");
     List idproduk = [];
     List list_qty = [];
@@ -49,16 +51,22 @@ class CheckoutViewModel extends BaseModel {
         idproduk.join(","), list_qty.join(","), value_kurir, layanan_data);
     print(data);
     if (data['status'] == "success") {
+      isKonfirmasi = true;
       biayaongkir = data['data']['biaya_ongkir'];
       subtotal = data['data']['subtotal'];
       total = data['data']['total'];
     }
+
     setBusy(false);
   }
 
   void getLayananKurir(String kurir) async {
     print("lokal layanan $kurir");
-
+    isKonfirmasi = false;
+    biayaongkir = 0;
+    layanan_data = "";
+    subtotal = 0;
+    total = 0;
     final data = await apiService.getKurirLayanan(kurir);
     layanan = data['data'];
     print("layanan $layanan");

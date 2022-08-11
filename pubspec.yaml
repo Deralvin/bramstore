@@ -44,8 +44,8 @@ dependencies:
   shared_preferences: ^2.0.15
   get_it: ^7.2.0
   hive: ^2.2.3
-  loader_overlay: ^2.0.10
   dropdown_button2: ^1.4.0
+  loading_overlay: ^0.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
