@@ -29,6 +29,7 @@ class ApiService {
   Future<LoginModel> loginAttempt(String email, String password) async {
     try {
       final uri = Uri.parse("${baseurl}/login");
+      print(uri);
       final response = await client.post(
         uri,
         body: {"email": email, "password": password},
@@ -37,6 +38,28 @@ class ApiService {
     } catch (e) {
       return LoginModel(
           status: "Failed", message: "Erro Occured $e", content: null);
+    }
+  }
+
+  Future<dynamic> registerAttempt(String email, String password, String nama,
+      String phone, String address, String city) async {
+    try {
+      final uri = Uri.parse("${baseurl}/register");
+      print(uri);
+      final response = await client.post(
+        uri,
+        body: {
+          "email": email,
+          "password": password,
+          "name": nama,
+          "phone": phone,
+          "city": city,
+          "address": address
+        },
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "failed", "message": "error occured $e"};
     }
   }
 

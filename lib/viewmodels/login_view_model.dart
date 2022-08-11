@@ -18,6 +18,33 @@ class LoginViewModel extends BaseModel {
     }
   }
 
+  void signUpAttempt({
+    String email = "",
+    String password = "",
+    required BuildContext context,
+    String nama = "",
+    String phone = "",
+    String address = "",
+  }) async {
+    final data = await apiService.registerAttempt(
+        email, password, nama, phone, address, "1");
+    print(data);
+    if (data['status'] == "success") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Berhasil Register"),
+        ),
+      );
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Gagal Register ${data['message']}"),
+        ),
+      );
+    }
+  }
+
   void signInAttempt(
       {String email = "",
       String password = "",

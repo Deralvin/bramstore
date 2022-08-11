@@ -1,21 +1,22 @@
-import 'package:bramstore/ui/views/register_view.dart';
 import 'package:bramstore/viewmodels/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+class RegisterView extends StatefulWidget {
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _SignInThreeState();
+  State<RegisterView> createState() => _SignInThreeState();
 }
 
-class _SignInThreeState extends State<LoginView> {
+class _SignInThreeState extends State<RegisterView> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-
+  TextEditingController namaController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -26,53 +27,7 @@ class _SignInThreeState extends State<LoginView> {
         backgroundColor: const Color(0xFF21899C),
         resizeToAvoidBottomInset: false,
         body: SafeArea(
-          child: SizedBox(
-            height: size.height,
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                //bg design, we use 3 svg img
-                Positioned(
-                  left: -26,
-                  top: 51.0,
-                  child: SvgPicture.string(
-                    '<svg viewBox="-26.0 51.0 91.92 91.92" ><path transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -26.0, 96.96)" d="M 48.75 0 L 65 32.5 L 48.75 65 L 16.24999809265137 65 L 0 32.5 L 16.25000381469727 0 Z" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -10.83, 105.24)" d="M 0 0 L 27.625 11.05000019073486 L 55.25 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, 16.51, 93.51)" d="M 0 37.04999923706055 L 0 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
-                    width: 91.92,
-                    height: 91.92,
-                  ),
-                ),
-                Positioned(
-                  right: 43.0,
-                  top: -103,
-                  child: SvgPicture.string(
-                    '<svg viewBox="63.0 -103.0 268.27 268.27" ><path transform="matrix(0.5, -0.866025, 0.866025, 0.5, 63.0, 67.08)" d="M 147.2896423339844 0 L 196.3861999511719 98.19309997558594 L 147.2896423339844 196.3861999511719 L 49.09654235839844 196.3861999511719 L 0 98.19309234619141 L 49.09656143188477 0 Z" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="matrix(0.5, -0.866025, 0.866025, 0.5, 113.73, 79.36)" d="M 0 0 L 83.46413421630859 33.38565444946289 L 166.9282684326172 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="matrix(0.5, -0.866025, 0.866025, 0.5, 184.38, 23.77)" d="M 0 111.9401321411133 L 0 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
-                    width: 268.27,
-                    height: 268.27,
-                  ),
-                ),
-                Positioned(
-                  right: -19,
-                  top: 31.0,
-                  child: SvgPicture.string(
-                    '<svg viewBox="329.0 31.0 65.0 65.0" ><path transform="translate(329.0, 31.0)" d="M 48.75 0 L 65 32.5 L 48.75 65 L 16.24999809265137 65 L 0 32.5 L 16.25000381469727 0 Z" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="translate(333.88, 47.58)" d="M 0 0 L 27.625 11.05000019073486 L 55.25 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /><path transform="translate(361.5, 58.63)" d="M 0 37.04999923706055 L 0 0" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.25" stroke-miterlimit="4" stroke-linecap="butt" /></svg>',
-                    width: 65.0,
-                    height: 65.0,
-                  ),
-                ),
-
-                //card and footer ui
-                Positioned(
-                  bottom: 20.0,
-                  child: Column(
-                    children: <Widget>[
-                      buildCard(size, model),
-                      buildFooter(size),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: buildCard(size, model),
         ),
       ),
     );
@@ -81,8 +36,6 @@ class _SignInThreeState extends State<LoginView> {
   Widget buildCard(Size size, LoginViewModel model) {
     return Container(
       alignment: Alignment.center,
-      width: size.width * 0.9,
-      height: size.height * 0.7,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
         color: Colors.white,
@@ -91,17 +44,20 @@ class _SignInThreeState extends State<LoginView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           //logo & text
-          logo(size.height / 8, size.height / 8),
-          SizedBox(
-            height: size.height * 0.03,
-          ),
+
           richText(24),
           SizedBox(
             height: size.height * 0.05,
           ),
-
+          namaTextField(size),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
+          phoneTextField(size),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
           //email & password textField
-
           emailTextField(size),
           SizedBox(
             height: size.height * 0.02,
@@ -110,12 +66,12 @@ class _SignInThreeState extends State<LoginView> {
           SizedBox(
             height: size.height * 0.03,
           ),
+          addressTextField(size),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
 
           //remember & forget text
-          buildRememberForgetSection(),
-          SizedBox(
-            height: size.height * 0.04,
-          ),
 
           //sign in button
           signInButton(size, model),
@@ -189,37 +145,29 @@ class _SignInThreeState extends State<LoginView> {
         SizedBox(
           height: size.height * 0.02,
         ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => RegisterView()));
-          },
-          child: Container(
-            child: Text.rich(
-              TextSpan(
-                style: GoogleFonts.inter(
-                  fontSize: 12.0,
-                  color: Colors.white,
-                ),
-                children: const [
-                  TextSpan(
-                    text: 'Don’t have an account? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'Sign Up here',
-                    style: TextStyle(
-                      color: Color(0xFFFE9879),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              textAlign: TextAlign.center,
+        Text.rich(
+          TextSpan(
+            style: GoogleFonts.inter(
+              fontSize: 12.0,
+              color: Colors.white,
             ),
+            children: const [
+              TextSpan(
+                text: 'Don’t have an account? ',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              TextSpan(
+                text: 'Sign Up here',
+                style: TextStyle(
+                  color: Color(0xFFFE9879),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
           ),
+          textAlign: TextAlign.center,
         ),
       ],
     );
@@ -243,7 +191,7 @@ class _SignInThreeState extends State<LoginView> {
         ),
         children: const [
           TextSpan(
-            text: 'LOGIN',
+            text: 'REGISTER',
             style: TextStyle(
               fontWeight: FontWeight.w800,
             ),
@@ -276,136 +224,6 @@ class _SignInThreeState extends State<LoginView> {
           cursorColor: const Color(0xFF151624),
           decoration: InputDecoration(
             hintText: 'Enter your email',
-            hintStyle: GoogleFonts.inter(
-              fontSize: 16.0,
-              color: const Color(0xFF151624).withOpacity(0.5),
-            ),
-            filled: true,
-            fillColor: emailController.text.isEmpty
-                ? const Color.fromRGBO(248, 247, 251, 1)
-                : Colors.transparent,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40),
-                borderSide: BorderSide(
-                  color: emailController.text.isEmpty
-                      ? Colors.transparent
-                      : const Color.fromRGBO(44, 185, 176, 1),
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40),
-                borderSide: const BorderSide(
-                  color: Color.fromRGBO(44, 185, 176, 1),
-                )),
-            prefixIcon: Icon(
-              Icons.mail_outline_rounded,
-              color: emailController.text.isEmpty
-                  ? const Color(0xFF151624).withOpacity(0.5)
-                  : const Color.fromRGBO(44, 185, 176, 1),
-              size: 16,
-            ),
-            suffix: Container(
-              alignment: Alignment.center,
-              width: 24.0,
-              height: 24.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100.0),
-                color: const Color.fromRGBO(44, 185, 176, 1),
-              ),
-              child: emailController.text.isEmpty
-                  ? const Center()
-                  : const Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 13,
-                    ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget namaTextField(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SizedBox(
-        height: size.height / 12,
-        child: TextField(
-          controller: emailController,
-          style: GoogleFonts.inter(
-            fontSize: 18.0,
-            color: const Color(0xFF151624),
-          ),
-          maxLines: 1,
-          keyboardType: TextInputType.name,
-          cursorColor: const Color(0xFF151624),
-          decoration: InputDecoration(
-            hintText: 'Enter your Name',
-            hintStyle: GoogleFonts.inter(
-              fontSize: 16.0,
-              color: const Color(0xFF151624).withOpacity(0.5),
-            ),
-            filled: true,
-            fillColor: emailController.text.isEmpty
-                ? const Color.fromRGBO(248, 247, 251, 1)
-                : Colors.transparent,
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40),
-                borderSide: BorderSide(
-                  color: emailController.text.isEmpty
-                      ? Colors.transparent
-                      : const Color.fromRGBO(44, 185, 176, 1),
-                )),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(40),
-                borderSide: const BorderSide(
-                  color: Color.fromRGBO(44, 185, 176, 1),
-                )),
-            prefixIcon: Icon(
-              Icons.mail_outline_rounded,
-              color: emailController.text.isEmpty
-                  ? const Color(0xFF151624).withOpacity(0.5)
-                  : const Color.fromRGBO(44, 185, 176, 1),
-              size: 16,
-            ),
-            suffix: Container(
-              alignment: Alignment.center,
-              width: 24.0,
-              height: 24.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100.0),
-                color: const Color.fromRGBO(44, 185, 176, 1),
-              ),
-              child: emailController.text.isEmpty
-                  ? const Center()
-                  : const Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 13,
-                    ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget phoneTextField(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SizedBox(
-        height: size.height / 12,
-        child: TextField(
-          controller: emailController,
-          style: GoogleFonts.inter(
-            fontSize: 18.0,
-            color: const Color(0xFF151624),
-          ),
-          maxLines: 1,
-          keyboardType: TextInputType.phone,
-          cursorColor: const Color(0xFF151624),
-          decoration: InputDecoration(
-            hintText: 'Enter your Phone',
             hintStyle: GoogleFonts.inter(
               fontSize: 16.0,
               color: const Color(0xFF151624).withOpacity(0.5),
@@ -520,13 +338,210 @@ class _SignInThreeState extends State<LoginView> {
     );
   }
 
+  Widget namaTextField(Size size) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SizedBox(
+        height: size.height / 12,
+        child: TextField(
+          controller: namaController,
+          style: GoogleFonts.inter(
+            fontSize: 18.0,
+            color: const Color(0xFF151624),
+          ),
+          maxLines: 1,
+          keyboardType: TextInputType.name,
+          cursorColor: const Color(0xFF151624),
+          decoration: InputDecoration(
+            hintText: 'Enter your Name',
+            hintStyle: GoogleFonts.inter(
+              fontSize: 16.0,
+              color: const Color(0xFF151624).withOpacity(0.5),
+            ),
+            filled: true,
+            fillColor: namaController.text.isEmpty
+                ? const Color.fromRGBO(248, 247, 251, 1)
+                : Colors.transparent,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(
+                  color: namaController.text.isEmpty
+                      ? Colors.transparent
+                      : const Color.fromRGBO(44, 185, 176, 1),
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: const BorderSide(
+                  color: Color.fromRGBO(44, 185, 176, 1),
+                )),
+            prefixIcon: Icon(
+              Icons.mail_outline_rounded,
+              color: namaController.text.isEmpty
+                  ? const Color(0xFF151624).withOpacity(0.5)
+                  : const Color.fromRGBO(44, 185, 176, 1),
+              size: 16,
+            ),
+            suffix: Container(
+              alignment: Alignment.center,
+              width: 24.0,
+              height: 24.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: const Color.fromRGBO(44, 185, 176, 1),
+              ),
+              child: namaController.text.isEmpty
+                  ? const Center()
+                  : const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 13,
+                    ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget addressTextField(Size size) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SizedBox(
+        child: TextField(
+          controller: addressController,
+          style: GoogleFonts.inter(
+            fontSize: 18.0,
+            color: const Color(0xFF151624),
+          ),
+          maxLines: 4,
+          keyboardType: TextInputType.streetAddress,
+          cursorColor: const Color(0xFF151624),
+          decoration: InputDecoration(
+            hintText: 'Enter your Address',
+            hintStyle: GoogleFonts.inter(
+              fontSize: 16.0,
+              color: const Color(0xFF151624).withOpacity(0.5),
+            ),
+            filled: true,
+            fillColor: addressController.text.isEmpty
+                ? const Color.fromRGBO(248, 247, 251, 1)
+                : Colors.transparent,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(
+                  color: addressController.text.isEmpty
+                      ? Colors.transparent
+                      : const Color.fromRGBO(44, 185, 176, 1),
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: const BorderSide(
+                  color: Color.fromRGBO(44, 185, 176, 1),
+                )),
+            prefixIcon: Icon(
+              Icons.mail_outline_rounded,
+              color: addressController.text.isEmpty
+                  ? const Color(0xFF151624).withOpacity(0.5)
+                  : const Color.fromRGBO(44, 185, 176, 1),
+              size: 16,
+            ),
+            suffix: Container(
+              alignment: Alignment.center,
+              width: 24.0,
+              height: 24.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: const Color.fromRGBO(44, 185, 176, 1),
+              ),
+              child: addressController.text.isEmpty
+                  ? const Center()
+                  : const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 13,
+                    ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget phoneTextField(Size size) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SizedBox(
+        height: size.height / 12,
+        child: TextField(
+          controller: phoneController,
+          style: GoogleFonts.inter(
+            fontSize: 18.0,
+            color: const Color(0xFF151624),
+          ),
+          maxLines: 1,
+          keyboardType: TextInputType.phone,
+          cursorColor: const Color(0xFF151624),
+          decoration: InputDecoration(
+            hintText: 'Enter your Phone',
+            hintStyle: GoogleFonts.inter(
+              fontSize: 16.0,
+              color: const Color(0xFF151624).withOpacity(0.5),
+            ),
+            filled: true,
+            fillColor: phoneController.text.isEmpty
+                ? const Color.fromRGBO(248, 247, 251, 1)
+                : Colors.transparent,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(
+                  color: phoneController.text.isEmpty
+                      ? Colors.transparent
+                      : const Color.fromRGBO(44, 185, 176, 1),
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: const BorderSide(
+                  color: Color.fromRGBO(44, 185, 176, 1),
+                )),
+            prefixIcon: Icon(
+              Icons.mail_outline_rounded,
+              color: phoneController.text.isEmpty
+                  ? const Color(0xFF151624).withOpacity(0.5)
+                  : const Color.fromRGBO(44, 185, 176, 1),
+              size: 16,
+            ),
+            suffix: Container(
+              alignment: Alignment.center,
+              width: 24.0,
+              height: 24.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.0),
+                color: const Color.fromRGBO(44, 185, 176, 1),
+              ),
+              child: phoneController.text.isEmpty
+                  ? const Center()
+                  : const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 13,
+                    ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget signInButton(Size size, LoginViewModel model) {
     return InkWell(
       onTap: () {
-        model.signInAttempt(
+        model.signUpAttempt(
+            context: context,
+            address: addressController.text,
             email: emailController.text,
+            nama: namaController.text,
             password: passController.text,
-            context: context);
+            phone: phoneController.text);
       },
       child: Container(
         alignment: Alignment.center,
@@ -544,7 +559,7 @@ class _SignInThreeState extends State<LoginView> {
           ],
         ),
         child: Text(
-          'Sign in',
+          'Sign Up',
           style: GoogleFonts.inter(
             fontSize: 16.0,
             color: Colors.white,
