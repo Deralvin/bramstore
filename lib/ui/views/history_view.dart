@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FavouriteView extends StatelessWidget {
-  const FavouriteView({Key? key}) : super(key: key);
+class HistoryView extends StatelessWidget {
+  const HistoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -157,7 +157,7 @@ class ApiService {
   Future<dynamic> konfirmasiPesanan(
       String listproduk, String qty, String kurir, String layanan) async {
     try {
-      final uri = Uri.parse("${baseurl}/transaksi/total");
+      final uri = Uri.parse("${baseurl}/transaksi/add");
       token = await tokenaccess();
       final response = await client.post(
         uri,
