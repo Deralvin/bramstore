@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.holymoly.bramstore">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="bramstore"
         android:name="${applicationName}"

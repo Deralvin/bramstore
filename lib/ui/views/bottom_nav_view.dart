@@ -14,12 +14,7 @@ class BottomNavView extends StatefulWidget {
 
 class _BotttomNavViewState extends State<BottomNavView> {
   int selectedIndex = 0;
-  final WidgetOptions = [
-    HomeView(),
-    FavouriteView(),
-    CartView(),
-    ProfileView()
-  ];
+  final WidgetOptions = [HomeView(), CartView(), ProfileView()];
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -36,10 +31,10 @@ class _BotttomNavViewState extends State<BottomNavView> {
       backgroundColor: kprimarycolor,
       body: WidgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: Container(
-        color: Colors.green,
+        color: Colors.white,
         child: BottomNavigationBar(
           selectedItemColor: kprimarycolor,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.white,
           elevation: 0,
           currentIndex: selectedIndex, //New
           onTap: onItemTapped,
@@ -48,10 +43,6 @@ class _BotttomNavViewState extends State<BottomNavView> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Beranda',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_rounded),
-              label: 'Favourite',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.card_travel),

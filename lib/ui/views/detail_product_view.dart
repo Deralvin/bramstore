@@ -191,7 +191,7 @@ class DetailProductView extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "Rp 210.000",
+                                  "Rp ${model.detail[0]['harga']}",
                                   style: blackTextStyle.copyWith(
                                       fontSize: 21, fontWeight: semiBold),
                                 ),
@@ -208,7 +208,9 @@ class DetailProductView extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(16)),
                                         primary: ksecondcolor),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      model.addToCart(context);
+                                    },
                                     child: Text("Add to Cart"),
                                   ),
                                 ),

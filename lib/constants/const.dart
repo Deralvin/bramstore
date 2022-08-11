@@ -9,3 +9,4 @@ String K_BIRTHDAY = "birthday";
 String K_GENDER = "gender";
 String K_PICTURE = "picture";
 String K_ACCESS_TOKEN = "access_token";
+String K_MY_CART = "mycart";
